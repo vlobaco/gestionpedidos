@@ -1,0 +1,39 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.4'
+	id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'es.mdef'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+	//necesario para añadir una librería externa
+	flatDir {
+       dirs("src/main/resources")
+   }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	//runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//necesario para gestionar tokens
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	//añadiendo librería externa
+	implementation ':ejemplo001_support'
+	//necesario para jjwt
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
